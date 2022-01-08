@@ -1,0 +1,44 @@
+﻿@page "/accounts"
+@using Blazor_Dynamics_Sample.Shared
+@using Blazor_Dynamics_Sample.Shared.Models
+@inject HttpClient Http
+
+<PageTitle>Accounts</PageTitle>
+
+<h1>Accounts</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (accounts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var account in accounts)
+            {
+                <tr>
+                    <td>@account.Name</td>
+                    <td>@account.Phone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private XrmAccount[]? accounts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        accounts = await Http.GetFromJsonAsync<XrmAccount[]>("api/accounts");
+    }
+}
