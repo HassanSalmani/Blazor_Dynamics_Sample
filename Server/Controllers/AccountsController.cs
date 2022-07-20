@@ -19,5 +19,16 @@ namespace Blazor_Dynamics_Sample.Server.Controllers
 
             return xrmAccounts.Take(10).ToList();
         }
+
+
+        public async Task CreateAccount(XrmAccount xrmAccount)
+        {
+            await dataService.CreateAccount(xrmAccount);
+        }
+
+        public async Task UpdateAccount(XrmAccount xrmAccount)
+        {
+            await dataService.UpdateAccount(xrmAccount);
+        }
     }
 }
